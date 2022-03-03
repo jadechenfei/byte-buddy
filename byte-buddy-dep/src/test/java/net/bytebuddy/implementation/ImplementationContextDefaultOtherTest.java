@@ -17,6 +17,8 @@ import static org.mockito.Mockito.mock;
 
 public class ImplementationContextDefaultOtherTest {
 
+    private static final String FOO = "foo";
+
     @Test
     public void testFactory() throws Exception {
         assertThat(Implementation.Context.Default.Factory.INSTANCE.make(mock(TypeDescription.class),
@@ -32,7 +34,8 @@ public class ImplementationContextDefaultOtherTest {
                 mock(ClassFileVersion.class),
                 mock(AuxiliaryType.NamingStrategy.class),
                 mock(TypeInitializer.class),
-                mock(ClassFileVersion.class)).isEnabled(), is(true));
+                mock(ClassFileVersion.class),
+                FOO).isEnabled(), is(true));
     }
 
     @Test
@@ -42,7 +45,8 @@ public class ImplementationContextDefaultOtherTest {
                 mock(ClassFileVersion.class),
                 mock(AuxiliaryType.NamingStrategy.class),
                 mock(TypeInitializer.class),
-                mock(ClassFileVersion.class)).getInstrumentedType(), is(instrumentedType));
+                mock(ClassFileVersion.class),
+                FOO).getInstrumentedType(), is(instrumentedType));
     }
 
     @Test(expected = UnsupportedOperationException.class)

@@ -45,6 +45,7 @@ import net.bytebuddy.implementation.bytecode.member.MethodInvocation;
 import net.bytebuddy.implementation.bytecode.member.MethodReturn;
 import net.bytebuddy.implementation.bytecode.member.MethodVariableAccess;
 import net.bytebuddy.matcher.ElementMatchers;
+import net.bytebuddy.utility.RandomString;
 import org.objectweb.asm.MethodVisitor;
 
 import java.io.Serializable;
@@ -277,6 +278,15 @@ public @interface Pipe {
              */
             private static String fieldName(int index) {
                 return FIELD_NAME_PREFIX + index;
+            }
+
+            /**
+             * {@inheritDoc}
+             */
+            public String getSuffix() {
+                return RandomString.hashOf(forwardingType.hashCode())
+                        + RandomString.hashOf(sourceMethod.hashCode())
+                        + (serializableProxy ? "S" : "0");
             }
 
             /**
